@@ -1,44 +1,25 @@
-
-
-//Write function return 'rock,paper,scissors'
-
-
+//Function that returns 3 randomized choices from computer and changes from num to str
 function getComputerChoice() {
     let randomNum = Math.floor(Math.random() * 3);
     switch (randomNum) {
         case 0:
-            return "rock";
+            return 'rock';
             break;
         case 1:
-            return "paper";
+            return 'paper';
             break;
         case 2:
-            return "scissors";
+            return 'scissors';
             break;
                         }
 }
 
 
-function getHumanChoice(userChoice) {
-    switch(userChoice) {
-        case "rock":
-            return "You chose rock!";
-        case "paper":
-            return "You chose paper!";
-        case "scissors":
-            return "You chose scissors!";
-        default:
-            return "Invalid choice! Please choose rock, paper, or scissors.";
-    }
-}
-
-
-
-
+//Plays one round and alerts live results
 function playRound(humanChoice, computerChoice) {
-        humanChoice = humanChoice.toLowerCase();
+    humanChoice = humanChoice.toLowerCase();
     
-        if (humanChoice === computerChoice) {
+    if (humanChoice === computerChoice) {
             return "It's a tie!";
         } else if (humanChoice === 'rock' && computerChoice === 'scissors') {
                   return 'You win! Rock beats scissors!';
@@ -47,45 +28,44 @@ function playRound(humanChoice, computerChoice) {
         } else if (humanChoice === 'scissors' && computerChoice === 'paper') {
                    return 'You win! Scissors beats paper!';
         } else {
-                    return 'You lose! ' + computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1) + ' beats ' + humanChoice + '!';
+                   return 'You lose! ' + computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1) + ' beats ' + humanChoice + '!';
                 }           
         }
 
 
-// Funktion för att spela spelet
+//Gets users input in prompt, computers choice. Writes it out in the console, plays 5 rounds and alerts final result
 function playGame() {
     let humanScore = 0;
     let computerScore = 0;
     
     for (let i = 0; i < 5; i++) {
-        let userChoice = window.prompt('Rock, Paper or Scissors?').toLowerCase(); // Hämta spelarens val
-        console.log(getHumanChoice(userChoice)); // Skriv ut spelarens val i konsolen
+        let userChoice = window.prompt('Rock, Paper or Scissors?').toLowerCase(); 
+        console.log('You chose: ' + userChoice); 
 
-        let computerChoice = getComputerChoice(); // Datorns val
-        console.log("Computer chose: " + computerChoice); // Skriv ut datorns val i konsolen
+        let computerChoice = getComputerChoice(); 
+        console.log('Computer chose: ' + computerChoice); 
 
-        // Spela en runda och skriv ut resultatet
+        
         let result = playRound(userChoice, computerChoice);
-        alert(result); // Visa resultatet i en prompt
+        alert(result); 
 
-        // Uppdatera poäng
-        if (result.includes('win')) {
+        
+    if (result.includes('win')) {
             humanScore++;
         } else if (result.includes('lose')) {
             computerScore++;
         }
     }
 
-    // Visa slutpoängen efter 5 rundor
     if (humanScore > computerScore) {
         alert('You win! Final score - You: ' + humanScore + ' Computer: ' + computerScore);
-    } else if (humanScore < computerScore) {
+        } else if (humanScore < computerScore) {
         alert('You lose! Final score - You: ' + humanScore + ' Computer: ' + computerScore);
-    } else {
+        } else {
         alert('It\'s a tie! Final score - You: ' + humanScore + ' Computer: ' + computerScore);
     }
 }
 
-// Starta spelet
+// Starts the game 
 playGame();
  
