@@ -34,38 +34,48 @@ function playRound(humanChoice, computerChoice) {
 
 
 //Gets users input in prompt, computers choice. Writes it out in the console, plays 5 rounds and alerts final result
-function playGame() {
+    
     let humanScore = 0;
     let computerScore = 0;
+    let gameOver = false;
+
+    const resultDisplay = document.querySelector(".result");
+    const scoreDisplay = document.querySelector(".score");
+    const buttons = document.querySelectorAll(".choice");
+
+        buttons.forEach(button => {
+            button.addEventListener("click", () => {
     
-    for (let i = 0; i < 5; i++) {
-        let userChoice = window.prompt('Rock, Paper or Scissors?').toLowerCase(); 
-        console.log('You chose: ' + userChoice); 
+        if (gameOver) return;
+
+        let userChoice = button.value;
+        resultDisplay.textContent = 'You chose: ' + userChoice; 
 
         let computerChoice = getComputerChoice(); 
-        console.log('Computer chose: ' + computerChoice); 
+        resultDisplay.textContent = 'Computer chose: ' + computerChoice; 
 
         
-        let result = playRound(userChoice, computerChoice);
-        alert(result); 
-
+        const result = playRound(userChoice, computerChoice);
+        resultDisplay.textContent = result;
         
-    if (result.includes('win')) {
+        if (result.includes('win')) {
             humanScore++;
         } else if (result.includes('lose')) {
             computerScore++;
         }
-    }
 
-    if (humanScore > computerScore) {
-        alert('You win! Final score - You: ' + humanScore + ' Computer: ' + computerScore);
+        scoreDisplay.textContent = `Score — You: ${humanScore} | Computer: ${computerScore}`;
+    
+        if (humanScore === 5 || computerScore === 5) {
+            gameOver = true;
+        if (humanScore > computerScore) {
+        resultDisplay.textContent = 'You win! Final score - You: ' + humanScore + ' Computer: ' + computerScore;
         } else if (humanScore < computerScore) {
-        alert('You lose! Final score - You: ' + humanScore + ' Computer: ' + computerScore);
+        resultDisplay.textContent = 'You lose! Final score - You: ' + humanScore + ' Computer: ' + computerScore;
         } else {
-        alert('It\'s a tie! Final score - You: ' + humanScore + ' Computer: ' + computerScore);
-    }
-}
+        resultDisplay.textContent = 'It\'s a tie! Final score - You: ' + humanScore + ' Computer: ' + computerScore;
+        }
+        }
+    });
+});
 
-// Starts the game 
-playGame();
- 
