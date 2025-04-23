@@ -45,8 +45,7 @@ function playRound(humanChoice, computerChoice) {
 
         buttons.forEach(button => {
             button.addEventListener("click", () => {
-    
-        if (gameOver) return;
+                if (gameOver) return;
 
         let userChoice = button.value;
         resultDisplay.textContent = 'You chose: ' + userChoice; 
@@ -57,6 +56,7 @@ function playRound(humanChoice, computerChoice) {
         
         const result = playRound(userChoice, computerChoice);
         resultDisplay.textContent = result;
+        
         
         if (result.includes('win')) {
             humanScore++;
@@ -69,11 +69,11 @@ function playRound(humanChoice, computerChoice) {
         if (humanScore === 5 || computerScore === 5) {
             gameOver = true;
         if (humanScore > computerScore) {
-        resultDisplay.textContent = 'You win! Final score - You: ' + humanScore + ' Computer: ' + computerScore;
+        resultDisplay.textContent = 'You won the game!';
         } else if (humanScore < computerScore) {
-        resultDisplay.textContent = 'You lose! Final score - You: ' + humanScore + ' Computer: ' + computerScore;
+        resultDisplay.textContent = 'You lost the game!';
         } else {
-        resultDisplay.textContent = 'It\'s a tie! Final score - You: ' + humanScore + ' Computer: ' + computerScore;
+        resultDisplay.textContent = 'It\'s a tie!';
         }
         }
     });
